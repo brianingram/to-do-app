@@ -1,0 +1,6 @@
+swagger: "2.0"
+info:
+  title: To Do App API
+  description: Placeholder for description
+  version: 1.0.0
+  
