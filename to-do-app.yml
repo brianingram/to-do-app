@@ -3,4 +3,111 @@ info:
   title: To Do App API
   description: Placeholder for description
   version: 1.0.0
-  
+
+host: to-do-app.com
+basepath: /v1
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+definitions:
+  To-Do:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      complete:
+        type: boolean
+    required:  
+      - id
+      - name
+
+paths:
+  /to-do-items:
+    get:
+      summary: Returns a list of to-do items
+      responses:
+        200:
+          description: A To-Do object.
+          schema:
+            $ref: '#/definitions/To-Do'
+        default:
+          description: Unexpected error
+
+    post:
+      summary: Adds a new to-do
+      parameters:
+        - in: body
+          name: to-do
+          schema:
+            $ref: '#/definitions/To-Do'
+      responses:
+        200:
+          description: OK
+
+  /to-do-item/{id}:
+    get:
+      summary: Gets a to-do by to-do Id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+          description: Id of the to-do list item
+      responses:
+        200:
+          description: A To-Do object.
+          schema:
+            $ref: '#/definitions/To-Do'
+        400:
+          description: The specified to-do ID is invalid (e.g. not a number).
+        404:
+          description: A to-do with the specified ID was not found.
+        default:
+          description: Unexpected error
+
+    put:
+      summary: Updates an existing to-do
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+          description: Id of the to-do list item
+      responses:
+        200:
+          description: OK.
+          schema:
+            $ref: '#/definitions/To-Do'
+        400:
+          description: The specified to-do ID is invalid (e.g. not a number).
+        404:
+          description: A to-do with the specified ID was not found.
+        default:
+          description: Unexpected error
+
+    delete:
+      summary: Deletes an existing to-do
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+          description: Id of the to-do list item
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/To-Do'
+        400:
+          description: The specified to-do ID is invalid (e.g. not a number).
+        404:
+          description: A to-do with the specified ID was not found.
+        default:
+          description: Unexpected error
+    
