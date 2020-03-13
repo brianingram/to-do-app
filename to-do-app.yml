@@ -34,6 +34,7 @@ paths:
         200:
           description: A To-Do object.
           schema:
+            type: array
             $ref: '#/definitions/To-Do'
         default:
           description: Unexpected error
@@ -75,7 +76,7 @@ paths:
       parameters:
         - in: query
           name: name
-          type: String
+          type: string
           required: false
           description: Updates the to-do name.
         - in: query
@@ -108,4 +109,3 @@ paths:
           description: A to-do with the specified ID was not found.
         default:
           description: Unexpected error
-    
