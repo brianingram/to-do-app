@@ -36,4 +36,5 @@ export class ToDoItemSearchComponent implements OnInit {
       switchMap((term: string) => this.toDoItemService.searchToDoItems(term)),
     );
   }
+
 }

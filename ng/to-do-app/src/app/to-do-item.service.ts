@@ -44,7 +44,7 @@ export class ToDoItemService {
       catchError(this.handleError<ToDoItem>(`getToDoItem id=${id}`))
     );
   }
-/* Not used
+
   searchToDoItems(term: string): Observable<ToDoItem[]> {
     if (!term.trim()) {
       // if not search term, return empty array.
@@ -57,7 +57,7 @@ export class ToDoItemService {
       catchError(this.handleError<ToDoItem[]>('searchToDoItems', []))
     );
   }
-*/
+
   addToDoItem (toDoItem: ToDoItem): Observable<ToDoItem> {
     return this.http.post<ToDoItem>(this.toDoItemsUrl, toDoItem, this.httpOptions).pipe(
       tap((newToDoItem: ToDoItem) => this.log(`added to do item w/ id=${newToDoItem.id}`)),
