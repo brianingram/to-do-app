@@ -7,7 +7,7 @@ import { ToDoItemDetailComponent } from './to-do-item-detail/to-do-item-detail.c
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
+//import { InMemoryDataService }  from './in-memory-data.service';
 import { ToDoItemSearchComponent } from './to-do-item-search/to-do-item-search.component';
 
 @NgModule({
@@ -22,9 +22,9 @@ import { ToDoItemSearchComponent } from './to-do-item-search/to-do-item-search.c
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    //HttpClientInMemoryWebApiModule.forRoot(
+    //  InMemoryDataService, { dataEncapsulation: false }
+    //)
   ],
 
   providers: [],

@@ -9,7 +9,8 @@ export class ToDoItemService {
 
   constructor(private http: HttpClient) { }
 
-  private toDoItemsUrl = 'api/toDoItems';  // URL to web api
+  private toDoItemsUrl = 'http://localhost:8080/to-do-items';
+  private toDoItemUrl = 'http://localhost:8080/to-do-item/'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,7 +25,7 @@ export class ToDoItemService {
   }
 
   getToDoItemNo404<Data>(id: number): Observable<ToDoItem> {
-    const url = `${this.toDoItemsUrl}/?id=${id}`;
+    const url = `${this.toDoItemUrl}/?id=${id}`;
     return this.http.get<ToDoItem[]>(url)
       .pipe(
         map(toDoItems => toDoItems[0]), // returns a {0|1} element array
@@ -37,26 +38,26 @@ export class ToDoItemService {
   }
 
   getToDoItem(id: number): Observable<ToDoItem> {
-    const url = `${this.toDoItemsUrl}/${id}`;
+    const url = `${this.toDoItemUrl}/${id}`;
     return this.http.get<ToDoItem>(url).pipe(
       tap(_ => this.log(`fetched to do item id=${id}`)),
       catchError(this.handleError<ToDoItem>(`getToDoItem id=${id}`))
     );
   }
-
+/* Not used
   searchToDoItems(term: string): Observable<ToDoItem[]> {
     if (!term.trim()) {
       // if not search term, return empty array.
       return of([]);
     }
-    return this.http.get<ToDoItem[]>(`${this.toDoItemsUrl}/?name=${term}`).pipe(
+    return this.http.get<ToDoItem[]>(`${this.toDoItemUrl}/?name=${term}`).pipe(
       tap(x => x.length ?
          this.log(`found to do items matching "${term}"`) :
          this.log(`no to do items matching "${term}"`)),
       catchError(this.handleError<ToDoItem[]>('searchToDoItems', []))
     );
   }
-
+*/
   addToDoItem (toDoItem: ToDoItem): Observable<ToDoItem> {
     return this.http.post<ToDoItem>(this.toDoItemsUrl, toDoItem, this.httpOptions).pipe(
       tap((newToDoItem: ToDoItem) => this.log(`added to do item w/ id=${newToDoItem.id}`)),
@@ -66,7 +67,7 @@ export class ToDoItemService {
 
   deleteToDoItem (toDoItem: ToDoItem | number): Observable<ToDoItem> {
     const id = typeof toDoItem === 'number' ? toDoItem : toDoItem.id;
-    const url = `${this.toDoItemsUrl}/${id}`;
+    const url = `${this.toDoItemUrl}/${id}`;
 
     return this.http.delete<ToDoItem>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted to do item id=${id}`)),
@@ -75,7 +76,10 @@ export class ToDoItemService {
   }
 
   updateToDoItem (toDoItem: ToDoItem): Observable<any> {
-    return this.http.put(this.toDoItemsUrl, toDoItem, this.httpOptions).pipe(
+    const id = typeof toDoItem === 'number' ? toDoItem : toDoItem.id;
+    const url = `${this.toDoItemUrl}/${id}`;
+
+    return this.http.put(url, toDoItem, this.httpOptions).pipe(
       tap(_ => this.log(`updated to do item id=${toDoItem.id}`)),
       catchError(this.handleError<any>('updateToDoItem'))
     );
