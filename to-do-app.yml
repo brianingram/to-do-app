@@ -35,7 +35,8 @@ paths:
           description: A To-Do object.
           schema:
             type: array
-            $ref: '#/definitions/To-Do'
+            items:
+              $ref: '#/definitions/To-Do'
         default:
           description: Unexpected error
 

@@ -1,0 +1,23 @@
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+a:link, a:visited {
+  background-color: rgba(206, 215, 219, 0.63);
+  color: black;
+  padding: 2px 2px;
+  border: 1px solid black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+.delete {
+  margin-left: 5px;
+}

@@ -1,0 +1,32 @@
+<h2>My To Do List</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID#</th>
+      <th>Name</th>
+      <th>Complete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let toDoItem of toDoItems">
+      <th>{{toDoItem.id}}</th>
+      <td>{{toDoItem.name}}</td>
+      <td>{{toDoItem.complete}}</td>
+      <td>
+        <a routerLink="/detail/{{toDoItem.id}}">Edit</a>
+        <button class="delete" type="button" (click)="delete(toDoItem)">Remove</button>
+     </td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <label>To do item name:
+    <input #toDoItemName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(toDoItemName.value); toDoItemName.value=''">
+    Add
+  </button>
+</div>

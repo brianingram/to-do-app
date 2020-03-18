@@ -1,0 +1,18 @@
+<div *ngIf="toDoItem">
+    <h2>Edit Details</h2>
+    <div><span>Id: </span>{{toDoItem.id}}</div>
+    <div>
+      <tr>
+        <label>Name:
+          <input [(ngModel)]="toDoItem.name" placeholder="name"/>
+        </label>
+      </tr>
+      <tr>
+        <label>Complete:
+          <input [(ngModel)]="toDoItem.complete" type="checkbox"/>
+        </label>
+      </tr>
+    </div>
+    <button (click)="goBack()">go back</button>
+    <button (click)="save()">save</button>
+</div>
